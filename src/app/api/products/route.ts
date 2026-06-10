@@ -140,9 +140,16 @@ async function searchProductsOptimized(category: string, maxPrice: number) {
   //
   // Hint: Use 'WHERE category = ? AND price <= ?' in your SQL.
   // Make sure you return an array containing only the matching products.
-  
-  throw new Error(
+  try {
+      const sql = 'SELECT * FROM products WHERE category = ? AND price <= ?';
+  const products = await runQuery<any[]>(sql, [category, maxPrice]);
+  return products;
+  } catch (error) {
+        throw new Error(
     "Optimized path is not yet implemented! " +
     "Please edit searchProductsOptimized() in 'src/app/api/products/route.ts' to solve the In-Memory Filtering issue."
   );
+  }
+  
+
 }

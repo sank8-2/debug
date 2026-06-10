@@ -145,6 +145,9 @@ async function fetchLogsOptimized() {
   //
   // Hint: Order by 'timestamp' descending and use 'LIMIT 10'.
   // Do NOT select the 'payload' column or use '*'.
+  const sql = 'SELECT id, action,timestamp FROM audit_logs ORDER BY timestamp DESC LIMIT 10';
+  const logs = await runQuery<any[]>(sql);
+  return logs;
   
   throw new Error(
     "Optimized path is not yet implemented! " +
